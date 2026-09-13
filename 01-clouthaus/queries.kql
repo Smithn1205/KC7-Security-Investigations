@@ -1,0 +1,32 @@
+// KC7 - CloutHaus
+// Selected KQL patterns used during the investigation.
+// Values can be replaced with the relevant user/IP/domain from the dataset.
+
+// Employee context
+Employees
+| where name contains "Afomiya"
+| project name, username, email_addr, hostname, ip_addr, user_agent, mfa_enabled
+
+// Suspicious website activity from an IP
+InboundNetworkEvents
+| where src_ip == "<suspicious IP>"
+| project timestamp, src_ip, url
+| order by timestamp asc
+
+// Passive DNS pivot
+PassiveDns
+| where ip == "<suspicious IP>"
+| project timestamp, domain, ip
+
+// Search activity related to the target
+InboundNetworkEvents
+| where src_ip == "<suspicious IP>"
+| where url contains "Afomiya"
+| project timestamp, url
+| order by timestamp asc
+
+// Find unique domains containing a keyword
+PassiveDns
+| where domain contains "hire"
+| distinct domain
+| count
