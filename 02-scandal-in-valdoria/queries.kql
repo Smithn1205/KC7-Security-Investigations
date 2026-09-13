@@ -1,0 +1,72 @@
+// KC7 - A Scandal in Valdoria
+// Selected KQL patterns from the investigation.
+
+// Distinct senders from a domain
+Email
+| where sender has "weprinturstuff.com"
+| distinct sender
+| count
+
+// Distinct URLs visited by a source IP
+OutboundNetworkEvents
+| where src_ip == "<user IP>"
+| distinct url
+| count
+
+// File creation - Word documents
+FileCreationEvents
+| where hostname == "<hostname>"
+| where filename endswith ".docx"
+| order by timestamp asc
+| project timestamp, hostname, filename, path
+
+// PowerShell scripts written to disk
+FileCreationEvents
+| where hostname == "<hostname>"
+| where filename endswith ".ps1"
+| order by timestamp asc
+| project timestamp, filename, path
+
+// Process activity involving PowerShell scripts
+ProcessEvents
+| where hostname == "<hostname>"
+| where process_commandline contains ".ps1"
+| project timestamp, process_name, process_commandline
+| order by timestamp asc
+
+// Scheduled task creation
+ProcessEvents
+| where hostname == "<hostname>"
+| where process_commandline contains "schtasks"
+| where process_commandline contains "/create"
+| project timestamp, process_commandline
+
+// Plink activity
+ProcessEvents
+| where hostname == "<hostname>"
+| where process_commandline contains "plink"
+| project timestamp, process_name, process_commandline
+
+// Common discovery commands
+ProcessEvents
+| where hostname == "<hostname>"
+| where process_commandline contains "whoami"
+   or process_commandline contains "ipconfig"
+   or process_commandline contains "arp"
+   or process_commandline contains "tasklist"
+   or process_commandline contains "net view"
+| project timestamp, process_commandline
+| order by timestamp asc
+
+// 7-Zip archive creation
+ProcessEvents
+| where hostname == "<hostname>"
+| where process_commandline contains "7z"
+| project timestamp, process_commandline
+
+// Curl activity potentially used for exfiltration
+ProcessEvents
+| where hostname == "<hostname>"
+| where process_commandline contains "curl"
+| project timestamp, process_commandline
+| order by timestamp asc
