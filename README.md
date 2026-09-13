@@ -2,9 +2,9 @@
 
 This repository contains security investigations I completed while working through the **KC7 Security Analyst I** learning path.
 
-I created this repo to document how I approached the investigations, the KQL I used to work through the evidence, and the conclusions I reached from the available logs.
+I created this repo to document how I approached the investigations, the queries and tools I used to work through the evidence, and the conclusions I reached from the available data.
 
-These are guided training scenarios provided by KC7, so I keep this repository separate from my self-built SOC home lab. The focus here is on investigation methodology, log analysis, and getting more comfortable working through security data with KQL.
+These are guided training scenarios provided by KC7, so I keep this repository separate from my self-built SOC home lab. The focus here is on investigation methodology, log analysis, threat-intelligence enrichment, and getting more comfortable working through security data with tools such as KQL and VirusTotal.
 
 ## Investigations
 
@@ -12,6 +12,7 @@ These are guided training scenarios provided by KC7, so I keep this repository s
 |---|---|---|
 | 01 | [CloutHaus: Social Media Leads to Compromise](./01-clouthaus/) | Suspicious logins, reconnaissance, OSINT, web activity, account compromise |
 | 02 | [A Scandal in Valdoria: A Political Mystery](./02-scandal-in-valdoria/) | Email investigation, malicious downloads, process analysis, persistence, discovery, collection and exfiltration |
+| 03 | [VirusTotal Fundamentals](./03-virustotal-fundamentals/) | Malware triage, file metadata, certificate analysis, YARA/Sigma, sandbox behavior, indicator pivoting and passive DNS |
 
 ## Skills I Practiced
 
@@ -24,10 +25,16 @@ These are guided training scenarios provided by KC7, so I keep this repository s
 - Identifying attacker discovery activity
 - Following data collection and exfiltration behavior
 - Building an attack timeline from separate pieces of evidence
+- Triaging suspicious files in VirusTotal
+- Reviewing file metadata and code-signing information
+- Interpreting crowdsourced YARA and Sigma detections
+- Investigating sandbox file, registry, and process behavior
+- Pivoting between files, domains, IP addresses, and passive DNS
+- Using threat-intelligence context to strengthen an investigation
 
-## Data Sources
+## Investigation Sources & Tools
 
-Across the investigations I worked with tables such as:
+Across the investigations I have worked with data and tools including:
 
 - `Employees`
 - `Email`
@@ -37,13 +44,15 @@ Across the investigations I worked with tables such as:
 - `PassiveDns`
 - `FileCreationEvents`
 - `ProcessEvents`
+- VirusTotal file, domain, IP, relations, behavior, and community data
+- MITRE ATT&CK
 
 ## About KC7
 
-[KC7](https://kc7cyber.com/) is a cybersecurity training platform built around investigation-style exercises using log data and Kusto Query Language (KQL).
+[KC7](https://kc7cyber.com/) is a cybersecurity training platform built around investigation-style exercises using security data and analyst tools.
 
 The scenarios and datasets in this repository come from KC7. The notes, query organization, and investigation summaries reflect my own learning while completing the exercises.
 
 ## Status
 
-I am currently working through the **Security Analyst I** path and will add selected investigations as I complete them.
+I am currently working through the **Security Analyst I** path. I have completed **VirusTotal Fundamentals** and will continue adding selected investigations as I finish them.
