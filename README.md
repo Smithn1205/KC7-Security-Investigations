@@ -13,6 +13,7 @@ These are guided training scenarios provided by KC7, so I keep this repository s
 | 01 | [CloutHaus: Social Media Leads to Compromise](./01-clouthaus/) | Suspicious logins, reconnaissance, OSINT, web activity, account compromise |
 | 02 | [A Scandal in Valdoria: A Political Mystery](./02-scandal-in-valdoria/) | Email investigation, malicious downloads, process analysis, persistence, discovery, collection and exfiltration |
 | 03 | [VirusTotal Fundamentals](./03-virustotal-fundamentals/) | Malware triage, file metadata, certificate analysis, YARA/Sigma, sandbox behavior, indicator pivoting and passive DNS |
+| 04 | [Jojo's Hospital: A Ransomware Investigation](./04-jojos-hospital/) | Ransomware investigation, process analysis, command-and-control, discovery, data staging and exfiltration |
 
 ## Skills I Practiced
 
@@ -31,6 +32,7 @@ These are guided training scenarios provided by KC7, so I keep this repository s
 - Investigating sandbox file, registry, and process behavior
 - Pivoting between files, domains, IP addresses, and passive DNS
 - Using threat-intelligence context to strengthen an investigation
+- Correlating endpoint and network activity across compromised hosts
 
 ## Investigation Sources & Tools
 
@@ -55,4 +57,6 @@ The scenarios and datasets in this repository come from KC7. The notes, query or
 
 ## Status
 
-I am currently working through the **Security Analyst I** path. I have completed **VirusTotal Fundamentals** and will continue adding selected investigations as I finish them.
+**Security Analyst I completed — 7 of 7 modules (100%).**
+
+The path covered event triage, KQL investigation, phishing and malicious indicators, VirusTotal IOC analysis, and end-to-end security investigation workflows.
