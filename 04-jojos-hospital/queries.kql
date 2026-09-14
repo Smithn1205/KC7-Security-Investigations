@@ -1,0 +1,65 @@
+// Jojo's Hospital: selected KQL patterns used during the investigation
+// Challenge-answer values are intentionally omitted from the public repo.
+
+// 1. Review process activity for an affected host and timeframe
+ProcessEvents
+| where hostname == "<HOSTNAME>"
+| where timestamp between (datetime(<START>) .. datetime(<END>))
+| project timestamp, parent_process_name, process_name, process_commandline, username
+| order by timestamp asc
+
+// 2. Search for execution of a suspicious document
+ProcessEvents
+| where hostname == "<HOSTNAME>"
+| where process_commandline contains "<SUSPICIOUS_DOCUMENT>.docx"
+| project timestamp, process_name, process_commandline, username
+| order by timestamp asc
+
+// 3. Review likely discovery commands after compromise
+ProcessEvents
+| where hostname == "<HOSTNAME>"
+| where timestamp > datetime(<COMPROMISE_TIME>)
+| where process_commandline contains "systeminfo"
+   or process_commandline contains "whoami"
+   or process_commandline contains "hostname"
+   or process_commandline contains "ipconfig"
+   or process_commandline contains "tasklist"
+   or process_commandline contains "net "
+| project timestamp, process_name, process_commandline
+| order by timestamp asc
+
+// 4. Search for archive creation / staging activity
+ProcessEvents
+| where hostname == "<HOSTNAME>"
+| where process_commandline contains ".zip"
+   or process_commandline contains "7z"
+   or process_commandline contains "Compress-Archive"
+| project timestamp, process_name, process_commandline, username
+| order by timestamp asc
+
+// 5. Search for curl-based data transfer
+ProcessEvents
+| where process_commandline contains "curl"
+| project timestamp, hostname, username, process_commandline
+| order by timestamp asc
+
+// 6. Search for cleanup commands
+ProcessEvents
+| where process_commandline contains "del "
+   or process_commandline contains "erase "
+   or process_commandline contains "Remove-Item"
+| project timestamp, hostname, username, process_commandline
+| order by timestamp asc
+
+// 7. Review authentication activity for a host/user pivot
+AuthenticationEvents
+| where hostname == "<HOSTNAME>"
+| project timestamp, username, src_ip, hostname
+| order by timestamp asc
+
+// 8. Review outbound network activity after identifying the source IP
+OutboundNetworkEvents
+| where src_ip == "<SOURCE_IP>"
+| where timestamp between (datetime(<START>) .. datetime(<END>))
+| project timestamp, src_ip, dest_ip, url
+| order by timestamp asc
