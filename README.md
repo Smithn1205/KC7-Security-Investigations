@@ -57,6 +57,6 @@ The scenarios and datasets in this repository come from KC7. The notes, query or
 
 ## Status
 
-**Security Analyst I completed — 7 of 7 modules (100%).**
+**Security Analyst I completed**
 
 The path covered event triage, KQL investigation, phishing and malicious indicators, VirusTotal IOC analysis, and end-to-end security investigation workflows.
